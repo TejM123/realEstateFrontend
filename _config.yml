@@ -1,9 +1,9 @@
-title: Meme Forge
+title: Elite Estates
 description: "August 2023 to June 2024"
-owner_name: Imaad Muzaffer
-github_username: Imaad08
-github_repo: "cpt-frontend"
-baseurl: "/cpt-frontend"
+owner_name: Tejas Manoj
+github_username: TejM123
+github_repo: "titanicfrontendREAL"
+baseurl: "/titanicfrontendREAL"
 remote_theme: jekyll/minima
 minima:
   social_links:
