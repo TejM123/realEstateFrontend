@@ -65,30 +65,105 @@
             bottom: 0;
             width: 100%;
         }
+        /* Style for input fields */
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #396e4a;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #2f5639;
+        }
     </style>
 </head>
 <body>
     <header>
-        <h1>Meme Forge</h1>
+        <h1>Elite Estates</h1>
     </header>
     <nav>
-        <a href="/cpt-frontend/editor">Editor</a>
-        <a href="/cpt-frontend/gallery">Gallery</a>
-        <a href="/cpt-frontend/login"> Admin Log In</a>
-        <a href="/cpt-frontend/plan">Planning</a>
+  
     </nav>
     <div class="main-content">
-        <h2>Welcome to Meme Forge!</h2>
+        <h2>Welcome to Elite Estates!</h2>
         <p>Create, edit, and explore hilarious memes with our easy-to-use meme maker and database.</p>
+        <form id="house-price-form">
+            <label for="size">Size (in sqft):</label>
+            <input type="number" id="size" name="size" required>
+            
+            <label for="bedrooms">Number of Bedrooms:</label>
+            <input type="number" id="bedrooms" name="bedrooms" required>
+            
+            <label for="bathrooms">Number of Bathrooms:</label>
+            <input type="number" id="bathrooms" name="bathrooms" required>
+
+            <label for="furnished">Furnished:</label>
+            <select id="furnished" name="furnished">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+            </select>
+            
+            <input type="submit" value="Predict Price">
+        </form>
         <div class="sample-images">
-            <img src="https://i.ibb.co/PM1Tjyk/meme1sample.png" alt="Sample 1">
-            <img src="https://i.ibb.co/gdVfLcY/meme3sample.webp" alt="Sample 2">
-            <img src="https://i1.sndcdn.com/artworks-9UMf6LSr0TC9NerV-NR1sZA-t500x500.jpg" alt="Sample 3">
-            <img src="https://i.ibb.co/svSwMpm/meem2sample.jpg" alt="Sample 4">
+            
         </div>
     </div>
     <footer>
-        <p>&copy; 2024 Meme Forge. All rights reserved.</p>
+        <p>&copy; 2024 Elite Estates. All rights reserved.</p>
     </footer>
+
+    <script>
+        document.getElementById('house-price-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            // Collect form data
+            const formData = {
+                size: document.getElementById('size').value,
+                bedrooms: document.getElementById('bedrooms').value,
+                bathrooms: document.getElementById('bathrooms').value,
+                furnished: document.getElementById('furnished').value
+            };
+    
+            // Send form data to the backend
+            fetch('/predict-house-price', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle response from the backend
+                console.log('Received response from backend:', data);
+                // Update UI as needed, e.g., display predicted house price
+            })
+            .catch(error => {
+                console.error('Error occurred during fetch:', error);
+                // Handle errors
+            });
+        });
+    </script>
 </body>
 </html>
