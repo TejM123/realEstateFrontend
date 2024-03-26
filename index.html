@@ -203,4 +203,29 @@
                 basement: document.getElementById('basement').value,
                 hotwaterheating: document.getElementById('hotwaterheating').value,
                 airconditioning: document.getElementById('airconditioning').value,
+                parking: document.getElementById('parking').value,
+                prefarea: document.getElementById('prefarea').value
+
             }
+
+            // Make a POST request to the backend API
+            fetch('http://127.0.0.1:8086/api/house_price/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the prediction result
+                alert('Predicted price: $' + data.predicted_price);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while processing your request.');
+            });
+        });
+    </script>
+</body>
+</html>
